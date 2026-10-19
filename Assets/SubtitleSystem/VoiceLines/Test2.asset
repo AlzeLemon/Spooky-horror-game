@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Test2
   m_EditorClassIdentifier: Assembly-CSharp::VoiceLine
   next: {fileID: 0}
-  text: 
+  text: This is a longer voiceline!
   holdTime: 1
-  speed: 10
+  speed: 20

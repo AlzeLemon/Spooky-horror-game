@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718b6b0e31edea64bbc50ae237996912, type: 3}
   m_Name: Test1
   m_EditorClassIdentifier: Assembly-CSharp::VoiceLine
+  next: {fileID: 11400000, guid: 72fb863700255b641b510c1ae9d7fe1d, type: 2}
   text: Test1
-  next: {fileID: 0}
+  holdTime: 1
+  speed: 20
