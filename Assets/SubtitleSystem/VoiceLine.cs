@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -17,6 +18,9 @@ public class VoiceLine : SubtitleEntry
     // In chars/second
     [Min(0.01f)]
     public float speed = 20f;
+
+    [Min(1)]
+    public int charsPerReveal = 1;
 
     [Range(0.5f, 1.5f)]
     public float basePitch = 1f;
@@ -58,17 +62,28 @@ public class VoiceLine : SubtitleEntry
         textField.ForceMeshUpdate();
 
         int nrChars = textField.textInfo.characterCount;
-        for (int i = 1; i <= nrChars; i++)
+        for (int i = 1; i <= nrChars / charsPerReveal; i++)
         {
-            await Awaitable.WaitForSecondsAsync(1 / speed, cancellationToken);
-            textField.maxVisibleCharacters = i;
+            await Awaitable.WaitForSecondsAsync(charsPerReveal / speed, cancellationToken);
+            textField.maxVisibleCharacters = i * charsPerReveal;
 
-            char c = textField.textInfo.characterInfo[i - 1].character;
+            if (voice != null) {
+                bool playSound = false;
+                for (int offset = 1; offset <= charsPerReveal; offset++)
+                {
+                    char c = textField.textInfo.characterInfo[i - offset].character;
+                    if (char.IsLetterOrDigit(c))
+                    {
+                        playSound = true;
+                        break;
+                    }
+                }
 
-            if (char.IsLetterOrDigit(c) && voice != null)
-            {
-                audioSource.pitch = UnityEngine.Random.Range(basePitch - pitchOffset, basePitch + pitchOffset);
-                audioSource.PlayOneShot(voice, volume);
+                if (playSound)
+                {
+                    audioSource.pitch = UnityEngine.Random.Range(basePitch - pitchOffset, basePitch + pitchOffset);
+                    audioSource.PlayOneShot(voice, volume);
+                }
             }
         }
 
