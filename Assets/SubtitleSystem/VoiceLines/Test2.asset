@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718b6b0e31edea64bbc50ae237996912, type: 3}
   m_Name: Test2
   m_EditorClassIdentifier: Assembly-CSharp::VoiceLine
-  next: {fileID: 0}
+  next: {fileID: 11400000, guid: 68df6bda665f0cf4d8872983fffadd33, type: 2}
   text: This is a longer voiceline!
   holdTime: 1
+  voice: {fileID: 8300000, guid: 6bd2f706441ba444db81df64de9757a5, type: 3}
+  volume: 0.5
   speed: 20
+  charsPerReveal: 1
+  basePitch: 1
+  pitchOffset: 0.05
