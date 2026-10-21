@@ -10,7 +10,8 @@ namespace StarterAssets
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
-		public bool jump;
+        public bool CanJump = true;
+        public bool jump;
 		public bool sprint;
 
 		[Header("Movement Settings")]
@@ -58,7 +59,7 @@ namespace StarterAssets
 
 		public void JumpInput(bool newJumpState)
 		{
-			jump = newJumpState;
+			jump = newJumpState & CanJump;
 		}
 
 		public void SprintInput(bool newSprintState)
