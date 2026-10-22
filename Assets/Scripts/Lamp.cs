@@ -7,16 +7,20 @@ public class Lamp : MonoBehaviour {
     private bool TurnedOn = true;
     void Start() {
         LightComponent = this.GetComponentInChildren<Light>();
-        HeadMaterial = this.transform.Find("Head").GetComponent<MeshRenderer>().material;
+        if (TurnedOffMaterial != null) {
+            HeadMaterial = this.transform.Find("Head").GetComponent<MeshRenderer>().material;
+        }
     }
 
     public void Toggle() {
         LightComponent.enabled = !LightComponent.enabled;
-        if (!TurnedOn) {
-            this.transform.Find("Head").GetComponent<MeshRenderer>().material = HeadMaterial;
-        }
-        else {
-            this.transform.Find("Head").GetComponent<MeshRenderer>().material = TurnedOffMaterial;
+        if (TurnedOffMaterial != null) {
+            if (!TurnedOn) {
+                this.transform.Find("Head").GetComponent<MeshRenderer>().material = HeadMaterial;
+            }
+            else {
+                this.transform.Find("Head").GetComponent<MeshRenderer>().material = TurnedOffMaterial;
+            }
         }
         TurnedOn = !TurnedOn;
     }
