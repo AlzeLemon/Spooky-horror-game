@@ -17,8 +17,8 @@ public class Interactor : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
-            IInteractable interactable =
-                hit.collider.GetComponentInParent<IInteractable>();
+            Interactable interactable =
+                hit.collider.GetComponentInParent<Interactable>();
 
             if (interactable != null &&
                 Keyboard.current != null &&
